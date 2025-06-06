@@ -1,7 +1,4 @@
 #!/bin/bash
 
-cat << EOF
----
-addons: []
-default_process_types: {}
-EOF 
+echo "--- {}"
+exit 0
