@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+echo "-----> Starting wkhtmltopdf cleanup buildpack"
+
+# Change to the build directory
+cd "$BUILD_DIR"
+
+echo "Cleaning up wkhtmltopdf binaries..."
+
+TARGET_DIR=$(find . -type d -path "*/vendor/bundle/*/gems/wkhtmltopdf-binary*/bin" | head -n 1)
+
+if [ -n "$TARGET_DIR" ]; then
+  echo "Found wkhtmltopdf bin dir: $TARGET_DIR"
+  find "$TARGET_DIR" -name 'wkhtmltopdf_*.gz' ! -name '*22.04_amd64*' -exec rm -f {} +
+  echo "wkhtmltopdf binaries cleaned."
+else
+  echo "wkhtmltopdf bin dir not found. Skipping."
+fi
+
+echo "-----> wkhtmltopdf cleanup buildpack completed" 

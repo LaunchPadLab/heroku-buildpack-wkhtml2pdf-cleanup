@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# This buildpack should run for all applications
+# It's designed to be used as a cleanup buildpack after other buildpacks
+echo "wkhtmltopdf-cleanup" 
